@@ -70,13 +70,5 @@ def play_game(card_choices=False):
 # Uncomment to play the game:
 play_game()
 
-'''
-TODO: First improvement - flip/reveal chosen cards so the player sees them whether they're a match or not. 
-Currently, the cards don't actually get 'flipped'/revealed for the player, unless both card
-choices make a match. If the cards were revealled when selected, the player could use their growing
-knowledge of the board as it has been revealed so far, to select the next cards.
 
-Change this version so that the board is displayed with the chosen cards revealed before
-the 'match status' is displayed. After check_match(), print_board can display its state 
-(i.e all matched pairs). 
-'''
+#TODO: Second improvement - flip/reveal chosen cards so the player sees them after each card selection. 
