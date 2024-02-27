@@ -34,23 +34,29 @@ def play_game(card_choices=False):
     while not all(all(row) for row in found_pairs):  # Check for game completion 
         # Input validation and error handling
         try:  # Convert input to integers and validate positions
+            # First card selection
             r1, c1 = map(int, input("Enter the row and column of the first card to flip (e.g., '1 2'): ").split())
+            card_choices = [(r1, c1)]
+            print_board(show_card_choices=True, card_choices=card_choices)
+            
+            # Second card selection
             r2, c2 = map(int, input("Enter the row and column of the second card to flip (e.g., '3 4'): ").split())
-            card_choices = (r1, c1), (r2, c2)
-            #print_board(show_card_choices=True, card_choices=card_choices)
+            
+            # Validation
             if r1 == r2 and c1 == c2:
                 print("You selected the same card twice. Please choose two different cards.")
                 continue
             if found_pairs[r1][c1] or found_pairs[r2][c2]:
                 print("One or both selected cards have already been matched. Please choose different cards.")
                 continue
+            else:
+                # Valid second card selection, add to card_choices & reveal
+                card_choices.append((r2, c2))
+                print_board(show_card_choices=True, card_choices=card_choices)
+        
         except (ValueError, IndexError):  # Handle invalid input or positions out of range
             print("Invalid input. Please enter the row and column as two integers separated by a space.")
             continue
-        
-        # Reveal card choices
-        print("Flipping cards...")
-        print_board(show_card_choices=True, card_choices=card_choices)
 
         # Check for a match
         if check_match(r1, c1, r2, c2):
@@ -71,4 +77,4 @@ def play_game(card_choices=False):
 play_game()
 
 
-#TODO: Second improvement - flip/reveal chosen cards so the player sees them after each card selection. 
+#TODO: Third improvement - allow player to choose size of board (regular shape, <100 cards). 
