@@ -6,6 +6,10 @@ random.shuffle(symbols)
 board = [symbols[i:i + 4] for i in range(0, 16, 4)]  # Generate 4x4 grid from the shuffled symbols list
 found_pairs = [[False] * 4 for _ in range(4)]  # Initialise 4x4 grid, all values set to False (to keep track of found pairs)
 
+# Take player's board preferences
+def get_board_size():
+    pass
+
 # Display current state of board for player   TODO: update to reflect player's chosen board size
 def print_board(show_all=False, show_card_choices=False, card_choices=[]):
     for i in range(4):
@@ -24,9 +28,10 @@ def check_match(r1, c1, r2, c2):
     return board[r1][c1] == board[r2][c2]
 
 # Entry point for game
-# Manages game state and progress; integrates various game components for a continuous experience. 
+# Manages game state and progress; integrates various game components for a continuous experience 
 def play_game(card_choices=False):
-    print("Welcome to the Memory Game! Here's the initial board:") #TODO: update so player can choose board size
+    print("Welcome to the Memory Game!")
+    length, width = get_board_size()
     print_board()
     moves = 0
     
