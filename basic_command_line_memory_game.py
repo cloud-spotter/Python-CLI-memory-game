@@ -8,7 +8,16 @@ found_pairs = [[False] * 4 for _ in range(4)]  # Initialise 4x4 grid, all values
 
 # Take player's board preferences
 def get_board_size():
-    pass
+    # Capture and validate user input
+    print("Choose between a square or rectangular board arrangement (maximum number of cards = 100).")
+    try:
+        dimensions = input('''Enter a single digit for a square board or two digits, separated by a space, for rectangular: ''')
+        dimensions = [int(dim) for dim in dimensions.split()]
+
+        # TODO: Validation block here
+
+    except ValueError:
+        print("Invalid input. Please enter numeric dimensions (either one or two integer digits).")
 
 # Display current state of board for player   TODO: update to reflect player's chosen board size
 def print_board(show_all=False, show_card_choices=False, card_choices=[]):
