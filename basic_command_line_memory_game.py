@@ -9,15 +9,40 @@ found_pairs = [[False] * 4 for _ in range(4)]  # Initialise 4x4 grid, all values
 # Take player's board preferences
 def get_board_size():
     # Capture and validate user input
-    print("Choose between a square or rectangular board arrangement (maximum number of cards = 100).")
-    try:
-        dimensions = input('''Enter a single digit for a square board or two digits, separated by a space, for rectangular: ''')
-        dimensions = [int(dim) for dim in dimensions.split()]
+    while True:   # Loop allows re-prompting, if validation fails
+        try:
+            dimensions = input('''Enter a single integer for a square board or two integers, separated by a space, for a rectangular board. 
+                                Total number of cards should not exceed 100. ''')
+            dimensions = [int(dim) for dim in dimensions.split()]
 
-        # TODO: Validation block here
+            # Validate the number of dimensions provided
+            # Square board
+            if len(dimensions) == 1:
+                n = dimensions[0]
+                if n * n > 100:
+                    print("The total number of cards should not exceed 100. Choose a number between 2 and 10.")
+                    continue
+                elif (n * n) % 2 != 0:
+                    print("The total number of cards must be even. Choose a different number.")
+                    continue
+                return n, n   # Return dimensions for square board 
+            
+            # Rectangular board
+            elif len(dimensions) == 2:
+                length, width = dimensions
+                if length * width > 100:
+                    print("The total number of cards should not exceed 100. Choose smaller numbers.")
+                    continue
+                elif length * width % 2 != 0:
+                    print("The total number of cards must be even. Choose different numbers.")
+                    continue
+                return length, width # Return dimensions for rectangular board
+            
+            else:
+                print("Invalid input. Please enter one or two integers.")
 
-    except ValueError:
-        print("Invalid input. Please enter numeric dimensions (either one or two integer digits).")
+        except ValueError:
+            print("Invalid input. Try again.")
 
 # Display current state of board for player   TODO: update to reflect player's chosen board size
 def print_board(show_all=False, show_card_choices=False, card_choices=[]):
