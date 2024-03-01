@@ -30,7 +30,7 @@ def get_board_size():
                 return num_rows, num_columns # Return board dimensions
             
             else:
-                print("Invalid input. Please enter one or two integers.")
+                print("Invalid input. Please enter two integers.")
 
         except ValueError:
             print("Invalid input. Try again.")
