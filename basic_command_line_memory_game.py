@@ -52,9 +52,9 @@ def get_board_size():
             print("Invalid input. Try again.")
 
 # Display current state of board for player   TODO: update to reflect player's chosen board size
-def print_board(board, found_pairs, show_all=False, show_card_choices=False, card_choices=[]):
-    for i in range(4):
-        for j in range(4):
+def print_board(board, found_pairs, length, width, show_all=False, show_card_choices=False, card_choices=[]):
+    for i in range(length):
+        for j in range(width):
             # If a match has been found (or show_all is True), display card value from associated board position
             if show_all or found_pairs[i][j] or (show_card_choices and (i, j)) in card_choices:
                 print(board[i][j], end=' ')
@@ -77,7 +77,7 @@ def play_game(card_choices=False):
     board, found_pairs = initialise_board(length, width)
     print(f"board_initialised. Board: {board}\nFound pairs: {found_pairs}")  #DEBUGGING
     print("Printing board:")  #DEBUGGING
-    print_board(board, found_pairs)  #   <---------------   PROBLEM HERE
+    print_board(board, found_pairs, length, width)
     moves = 0
     
     # Core gameplay loop
@@ -87,7 +87,7 @@ def play_game(card_choices=False):
             # First card selection
             r1, c1 = map(int, input("Enter the row and column of the first card to flip (e.g., '1 2'): ").split())
             card_choices = [(r1, c1)]
-            print_board(board, found_pairs, show_card_choices=True, card_choices=card_choices)
+            print_board(board, found_pairs, length, width, show_card_choices=True, card_choices=card_choices)
             
             # Second card selection
             r2, c2 = map(int, input("Enter the row and column of the second card to flip (e.g., '3 4'): ").split())
@@ -102,26 +102,26 @@ def play_game(card_choices=False):
             else:
                 # Valid second card selection, add to card_choices & reveal
                 card_choices.append((r2, c2))
-                print_board(board, found_pairs, show_card_choices=True, card_choices=card_choices)
+                print_board(board, found_pairs, length, width, show_card_choices=True, card_choices=card_choices)
         
         except (ValueError, IndexError):  # Handle invalid input or positions out of range
             print("Invalid input. Please enter the row and column as two integers separated by a space.")
             continue
 
         # Check for a match
-        if check_match(r1, c1, r2, c2):
+        if check_match(r1, c1, r2, c2, board):
             print("It's a match!")
             found_pairs[r1][c1] = True
             found_pairs[r2][c2] = True
         else:
             print("Not a match.")
         
-        print_board(board, found_pairs)  # Progress update (display current board state)
+        print_board(board, found_pairs, length, width)  # Progress update (display current board state)
         moves += 1  # Track number of moves
     
     print(f"Congratulations, you've matched all pairs in {moves} moves!")
     print("Final board:")
-    print_board(board, found_pairs, show_all=True)
+    print_board(board, found_pairs, length, width, show_all=True)
 
 # Uncomment to play the game:
 play_game()
