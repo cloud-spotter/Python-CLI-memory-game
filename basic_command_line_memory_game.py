@@ -36,7 +36,10 @@ def get_board_size():
             print("Invalid input. Try again.")
 
 # Display current state of board for player
-def print_board(board, found_pairs, num_rows, num_columns, show_all=False, show_card_choices=False, card_choices=[]): # TODO: Refactor this so not using default with empty list. Ask ChatGPT WHY NOT & then adjust. Set default to None & then inside the func body, can write a condition, if card_choices == None: card_choices = []
+def print_board(board, found_pairs, num_rows, num_columns, show_all=False, show_card_choices=False, card_choices=None):
+    if card_choices is None:    # Initialise card_choices here rather than using a mutable data structure for an argument default
+        card_choices = []
+    
     for i in range(num_rows):
         for j in range(num_columns):
             # If a match has been found (or show_all is True), display card value from associated board position
@@ -57,10 +60,7 @@ def check_match(r1, c1, r2, c2, board):
 def play_game(card_choices=False):
     print("Welcome to the Memory Game!")
     num_rows, num_columns = get_board_size()
-    #print(f"num_rows is {num_rows}, num_columns is {num_columns}")  #DEBUGGING TODO: delete debugging statements once improvement 3 complete
     board, found_pairs = initialise_board(num_rows, num_columns)
-    #print(f"board_initialised. Board: {board}\nFound pairs: {found_pairs}")  #DEBUGGING
-    #print("Printing board:")  #DEBUGGING
     print_board(board, found_pairs, num_rows, num_columns)
     moves = 0
     
@@ -109,7 +109,3 @@ def play_game(card_choices=False):
 
 # Uncomment to play the game:
 play_game()
-
-
-'''TODO: Third improvement - allow player to choose size of board (regular shape, <100 cards).
-Almost complete (some refactoring noted in TODO above)'''
