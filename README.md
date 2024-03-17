@@ -25,7 +25,7 @@ git clone https://github.com/cloud-spotter/python-CLI-memory-game.git
 
 2. Navigate to the project directory:
 ```python
-cd python-cli-memory-game
+cd python-CLI\-memory-game
 ```
 
 3. Run the game:
