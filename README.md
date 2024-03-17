@@ -19,16 +19,16 @@ The initial version of this program was generated with AI assistance and served 
 ## Installation
 
 1. Clone the repository:
-```python
+```
 git clone https://github.com/cloud-spotter/python-CLI-memory-game.git
 ```
 
 2. Navigate to the project directory:
-```python
-cd python-CLI\-memory-game
+```
+cd python-CLI-memory-game
 ```
 
 3. Run the game:
-```python
+```
 python memory_game.py
 ```
